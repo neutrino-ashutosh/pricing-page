@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Complete Your Enrollment</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      display: flex;
+      height: 100vh;
+    }
+
+    .left {
+      width: 55%;
+      padding: 50px;
+      background: #ffffff;
+    }
+
+    .right {
+      width: 45%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('https://cdn.razorpay.com/static/assets/paymentpages/light_mobile.jpg');
+      background-size: cover;
+    }
+
+    .box {
+      background: rgba(255,255,255,0.96);
+      padding: 30px;
+      width: 360px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin: 6px 0;
+      font-size: 14px;
+    }
+
+    .label { color: #666; }
+    .value { color: #111; }
+
+    /* 🔥 IMPROVED PRICE DESIGN */
+    .big {
+      font-size: 26px;
+      font-weight: bold;
+      color: #1b5e20;
+      margin-top: 15px;
+    }
+
+    .big span {
+      color: #2e7d32;
+      font-size: 30px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: #528ff0;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .secondary-btn {
+      background: #f1f3f4;
+      color: #333;
+    }
+
+    .urgency {
+      color: red;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    #adminPanel {
+      display: none;
+      background: #f5f5f5;
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+
+    .secure {
+      font-size: 12px;
+      margin-top: 10px;
+      text-align: center;
+      color: #444;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="left">
+  <h1>Give Your Child the Confidence to Speak & Shine 🚀</h1>
+
+  <p>✔ 1:1 Live Classes</p>
+  <p>✔ Certified Trainers</p>
+  <p>✔ Public Speaking Skills</p>
+  <p>✔ Personalized Feedback</p>
+  <p>✔ Confidence Building</p>
+
+  <p style="margin-top:20px;">⭐ Trusted by 1.5 Lac+ Parents</p>
+</div>
+
+<div class="right">
+  <div class="box">
+
+    <h3>Complete Your Enrollment</h3>
+
+    <!-- ❌ Enrollment ID REMOVED -->
+    <input id="studentName" placeholder="Student Name">
+    <input id="studentAge" type="number" placeholder="Student Age">
+
+    <input id="sessions" type="number" placeholder="Enter Sessions (Min 120)">
+    <input id="coupon" placeholder="Enter Coupon Code">
+
+    <div class="row"><span class="label">Level</span><span id="level" class="value">-</span></div>
+    <div class="row"><span class="label">Program Value</span><span id="programFee" class="value">-</span></div>
+    <div class="row"><span class="label">Enrollment Fee</span><span id="regFee" class="value">-</span></div>
+    <div class="row"><span class="label">Balance</span><span id="remaining" class="value">-</span></div>
+    <div class="row"><span class="label">EMI (18)</span><span id="emi18" class="value">-</span></div>
+    <div class="row"><span class="label">EMI (12)</span><span id="emi12" class="value">-</span></div>
+
+    <div class="big">Offer Price: <span id="oneTime">-</span></div>
+
+    <div class="urgency">⏳ Offer expires in: <span id="timer">--:--</span></div>
+
+    <button class="secondary-btn" onclick="calculate()">Check Program Value</button>
+    <button onclick="payNow()">Proceed to Payment</button>
+
+    <button onclick="toggleAdmin()">⚙ Admin</button>
+
+    <div id="adminPanel">
+      <input id="cpc" type="number" placeholder="Default CPC">
+      <input id="discountCpc" type="number" placeholder="Discount CPC">
+      <button onclick="saveAdmin()">Save & Apply</button>
+    </div>
+
+    <!-- ✅ RESTORED -->
+    <div class="secure">
+      🔒 100% Secure Payment via Razorpay
+    </div>
+
+  </div>
+</div>
+
+<script>
+const DEFAULT_CPC = 2060;
+const DEFAULT_DISC = 1710;
+let timerInterval = null;
+
+function getCPC() {
+  return Number(localStorage.getItem("cpc")) || DEFAULT_CPC;
+}
+function getDISC() {
+  return Number(localStorage.getItem("discountCpc")) || DEFAULT_DISC;
+}
+
+function toggleAdmin() {
+  let panel = document.getElementById("adminPanel");
+  panel.style.display = panel.style.display === "none" ? "block" : "none";
+
+  document.getElementById("cpc").value = getCPC();
+  document.getElementById("discountCpc").value = getDISC();
+}
+
+function saveAdmin() {
+  let cpc = document.getElementById("cpc").value;
+  let disc = document.getElementById("discountCpc").value;
+
+  if (!cpc || !disc) {
+    alert("Fill both values");
+    return;
+  }
+
+  localStorage.setItem("cpc", cpc);
+  localStorage.setItem("discountCpc", disc);
+
+  document.getElementById("adminPanel").style.display = "none";
+  calculate();
+}
+
+// Timer now based on student name (since lead removed)
+function getKey() {
+  let name = document.getElementById("studentName").value.trim();
+  return name ? "timer_" + name : null;
+}
+
+document.getElementById("studentName").addEventListener("change", () => {
+  let key = getKey();
+  if (key) localStorage.removeItem(key);
+
+  clearInterval(timerInterval);
+  document.getElementById("timer").innerText = "--:--";
+});
+
+function startTimer() {
+  let key = getKey();
+  let expiry = Date.now() + 30*60*1000;
+  localStorage.setItem(key, expiry);
+  runTimer(expiry);
+}
+
+function runTimer(expiry) {
+  clearInterval(timerInterval);
+
+  timerInterval = setInterval(() => {
+    let t = Math.floor((expiry - Date.now())/1000);
+
+    if (t <= 0) {
+      clearInterval(timerInterval);
+      document.getElementById("timer").innerText = "Expired";
+      return;
+    }
+
+    let m = Math.floor(t/60);
+    let s = t%60;
+
+    document.getElementById("timer").innerText =
+      String(m).padStart(2,'0') + ":" +
+      String(s).padStart(2,'0');
+
+  },1000);
+}
+
+function calculate() {
+  let sessions = Number(document.getElementById("sessions").value);
+  let coupon = document.getElementById("coupon").value.trim();
+  let key = getKey();
+
+  if (!sessions || sessions < 120 || !key) return;
+
+  let CPC = getCPC();
+  let DISC = getDISC();
+
+  let program = (sessions/5)*CPC;
+  let reg = Math.round(program*0.15);
+  let rem = program - reg;
+
+  let emi18 = Math.floor(rem/18);
+  let emi12 = Math.floor(rem/12);
+
+  let lvlVal = ((sessions/5)/12)+1;
+  let lvl = lvlVal<4?"Beginner":lvlVal<7?"Intermediate":"Advanced";
+
+  let expiry = localStorage.getItem(key);
+  let one;
+
+  if (coupon.length >= 5) {
+    if (!expiry) {
+      startTimer();
+      expiry = localStorage.getItem(key);
+    }
+
+    if (expiry - Date.now() > 0) {
+      one = (sessions/5)*DISC;
+      runTimer(expiry);
+    } else {
+      one = program;
+      document.getElementById("timer").innerText = "Expired";
+    }
+  } else {
+    one = program;
+  }
+
+  document.getElementById("level").innerText = lvl;
+  document.getElementById("programFee").innerText = "₹"+program.toFixed(0);
+  document.getElementById("regFee").innerText = "₹"+reg;
+  document.getElementById("remaining").innerText = "₹"+rem;
+  document.getElementById("emi18").innerText = "₹"+emi18;
+  document.getElementById("emi12").innerText = "₹"+emi12;
+  document.getElementById("oneTime").innerText = "₹"+one.toFixed(0);
+}
+
+function payNow() {
+  window.location.href = "https://pages.razorpay.com/planetspark";
+}
+</script>
+
+</body>
+</html>
