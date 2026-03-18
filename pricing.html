@@ -11,12 +11,50 @@
       height: 100vh;
     }
 
+    /* LEFT PANEL */
     .left {
       width: 55%;
-      padding: 50px;
+      padding: 40px 50px;
       background: #ffffff;
+      display: flex;
+      align-items: center;
     }
 
+    .left-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .left-text {
+      width: 55%;
+    }
+
+    .left-image {
+      width: 45%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .left-image img {
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .logo {
+      width: 160px;
+      margin-bottom: 20px;
+    }
+
+    .highlight {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #2e7d32;
+      font-size: 16px;
+    }
+
+    /* RIGHT PANEL */
     .right {
       width: 45%;
       display: flex;
@@ -52,7 +90,6 @@
     .label { color: #666; }
     .value { color: #111; }
 
-    /* 🔥 IMPROVED PRICE DESIGN */
     .big {
       font-size: 26px;
       font-weight: bold;
@@ -102,29 +139,72 @@
       text-align: center;
       color: #444;
     }
+
+    /* MOBILE FIX */
+    @media(max-width: 900px){
+      body {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .left, .right {
+        width: 100%;
+      }
+
+      .left-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .left-text, .left-image {
+        width: 100%;
+      }
+
+      .left-image {
+        margin-top: 20px;
+      }
+    }
+
   </style>
 </head>
 
 <body>
 
+<!-- LEFT -->
 <div class="left">
-  <h1>Give Your Child the Confidence to Speak & Shine 🚀</h1>
+  <div class="left-inner">
 
-  <p>✔ 1:1 Live Classes</p>
-  <p>✔ Certified Trainers</p>
-  <p>✔ Public Speaking Skills</p>
-  <p>✔ Personalized Feedback</p>
-  <p>✔ Confidence Building</p>
+    <div class="left-text">
+      <img class="logo" src="https://cdn.razorpay.com/logos/IY7M3KW1vnuOiP_large.jpeg"/>
 
-  <p style="margin-top:20px;">⭐ Trusted by 1.5 Lac+ Parents</p>
+      <h1>Give Your Child the Confidence to Speak & Shine 🚀</h1>
+
+      <p>✔ 1:1 Live Classes</p>
+      <p>✔ Certified Trainers</p>
+      <p>✔ Public Speaking Skills</p>
+      <p>✔ Personalized Feedback</p>
+      <p>✔ Confidence Building</p>
+
+      <p style="margin-top:20px;">⭐ Trusted by 1.5 Lac+ Parents</p>
+
+      <div class="highlight">
+        Your child’s transformation starts today
+      </div>
+    </div>
+
+    <div class="left-image">
+      <img src="https://s3.ap-south-1.amazonaws.com/rzp-prod-merchant-assets/payment-link/description/untitled%20design%20(9)_fzhauc6makwbhh_i79nfxhttx9xyi">
+    </div>
+
+  </div>
 </div>
 
+<!-- RIGHT -->
 <div class="right">
   <div class="box">
 
     <h3>Complete Your Enrollment</h3>
 
-    <!-- ❌ Enrollment ID REMOVED -->
     <input id="studentName" placeholder="Student Name">
     <input id="studentAge" type="number" placeholder="Student Age">
 
@@ -153,7 +233,6 @@
       <button onclick="saveAdmin()">Save & Apply</button>
     </div>
 
-    <!-- ✅ RESTORED -->
     <div class="secure">
       🔒 100% Secure Payment via Razorpay
     </div>
@@ -166,131 +245,110 @@ const DEFAULT_CPC = 2060;
 const DEFAULT_DISC = 1710;
 let timerInterval = null;
 
-function getCPC() {
-  return Number(localStorage.getItem("cpc")) || DEFAULT_CPC;
-}
-function getDISC() {
-  return Number(localStorage.getItem("discountCpc")) || DEFAULT_DISC;
-}
+function getCPC(){return Number(localStorage.getItem("cpc"))||DEFAULT_CPC;}
+function getDISC(){return Number(localStorage.getItem("discountCpc"))||DEFAULT_DISC;}
 
-function toggleAdmin() {
-  let panel = document.getElementById("adminPanel");
-  panel.style.display = panel.style.display === "none" ? "block" : "none";
-
-  document.getElementById("cpc").value = getCPC();
-  document.getElementById("discountCpc").value = getDISC();
+function toggleAdmin(){
+  let panel=document.getElementById("adminPanel");
+  panel.style.display=panel.style.display==="none"?"block":"none";
+  document.getElementById("cpc").value=getCPC();
+  document.getElementById("discountCpc").value=getDISC();
 }
 
-function saveAdmin() {
-  let cpc = document.getElementById("cpc").value;
-  let disc = document.getElementById("discountCpc").value;
-
-  if (!cpc || !disc) {
-    alert("Fill both values");
-    return;
-  }
-
-  localStorage.setItem("cpc", cpc);
-  localStorage.setItem("discountCpc", disc);
-
-  document.getElementById("adminPanel").style.display = "none";
+function saveAdmin(){
+  let cpc=document.getElementById("cpc").value;
+  let disc=document.getElementById("discountCpc").value;
+  if(!cpc||!disc){alert("Fill both values");return;}
+  localStorage.setItem("cpc",cpc);
+  localStorage.setItem("discountCpc",disc);
+  document.getElementById("adminPanel").style.display="none";
   calculate();
 }
 
-// Timer now based on student name (since lead removed)
-function getKey() {
-  let name = document.getElementById("studentName").value.trim();
-  return name ? "timer_" + name : null;
+function getKey(){
+  let name=document.getElementById("studentName").value.trim();
+  return name?"timer_"+name:null;
 }
 
-document.getElementById("studentName").addEventListener("change", () => {
-  let key = getKey();
-  if (key) localStorage.removeItem(key);
-
+document.getElementById("studentName").addEventListener("change",()=>{
+  let key=getKey();
+  if(key)localStorage.removeItem(key);
   clearInterval(timerInterval);
-  document.getElementById("timer").innerText = "--:--";
+  document.getElementById("timer").innerText="--:--";
 });
 
-function startTimer() {
-  let key = getKey();
-  let expiry = Date.now() + 30*60*1000;
-  localStorage.setItem(key, expiry);
+function startTimer(){
+  let key=getKey();
+  let expiry=Date.now()+30*60*1000;
+  localStorage.setItem(key,expiry);
   runTimer(expiry);
 }
 
-function runTimer(expiry) {
+function runTimer(expiry){
   clearInterval(timerInterval);
-
-  timerInterval = setInterval(() => {
-    let t = Math.floor((expiry - Date.now())/1000);
-
-    if (t <= 0) {
+  timerInterval=setInterval(()=>{
+    let t=Math.floor((expiry-Date.now())/1000);
+    if(t<=0){
       clearInterval(timerInterval);
-      document.getElementById("timer").innerText = "Expired";
+      document.getElementById("timer").innerText="Expired";
       return;
     }
-
-    let m = Math.floor(t/60);
-    let s = t%60;
-
-    document.getElementById("timer").innerText =
-      String(m).padStart(2,'0') + ":" +
-      String(s).padStart(2,'0');
-
+    let m=Math.floor(t/60);
+    let s=t%60;
+    document.getElementById("timer").innerText=
+      String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
   },1000);
 }
 
-function calculate() {
-  let sessions = Number(document.getElementById("sessions").value);
-  let coupon = document.getElementById("coupon").value.trim();
-  let key = getKey();
+function calculate(){
+  let sessions=Number(document.getElementById("sessions").value);
+  let coupon=document.getElementById("coupon").value.trim();
+  let key=getKey();
+  if(!sessions||sessions<120||!key)return;
 
-  if (!sessions || sessions < 120 || !key) return;
+  let CPC=getCPC();
+  let DISC=getDISC();
 
-  let CPC = getCPC();
-  let DISC = getDISC();
+  let program=(sessions/5)*CPC;
+  let reg=Math.round(program*0.15);
+  let rem=program-reg;
 
-  let program = (sessions/5)*CPC;
-  let reg = Math.round(program*0.15);
-  let rem = program - reg;
+  let emi18=Math.floor(rem/18);
+  let emi12=Math.floor(rem/12);
 
-  let emi18 = Math.floor(rem/18);
-  let emi12 = Math.floor(rem/12);
+  let lvlVal=((sessions/5)/12)+1;
+  let lvl=lvlVal<4?"Beginner":lvlVal<7?"Intermediate":"Advanced";
 
-  let lvlVal = ((sessions/5)/12)+1;
-  let lvl = lvlVal<4?"Beginner":lvlVal<7?"Intermediate":"Advanced";
-
-  let expiry = localStorage.getItem(key);
+  let expiry=localStorage.getItem(key);
   let one;
 
-  if (coupon.length >= 5) {
-    if (!expiry) {
+  if(coupon.length>=5){
+    if(!expiry){
       startTimer();
-      expiry = localStorage.getItem(key);
+      expiry=localStorage.getItem(key);
     }
-
-    if (expiry - Date.now() > 0) {
-      one = (sessions/5)*DISC;
+    if(expiry-Date.now()>0){
+      one=(sessions/5)*DISC;
       runTimer(expiry);
-    } else {
-      one = program;
-      document.getElementById("timer").innerText = "Expired";
+    }else{
+      one=program;
+      document.getElementById("timer").innerText="Expired";
     }
-  } else {
-    one = program;
+  }else{
+    one=program;
   }
 
-  document.getElementById("level").innerText = lvl;
-  document.getElementById("programFee").innerText = "₹"+program.toFixed(0);
-  document.getElementById("regFee").innerText = "₹"+reg;
-  document.getElementById("remaining").innerText = "₹"+rem;
-  document.getElementById("emi18").innerText = "₹"+emi18;
-  document.getElementById("emi12").innerText = "₹"+emi12;
-  document.getElementById("oneTime").innerText = "₹"+one.toFixed(0);
+  document.getElementById("level").innerText=lvl;
+  document.getElementById("programFee").innerText="₹"+program.toFixed(0);
+  document.getElementById("regFee").innerText="₹"+reg;
+  document.getElementById("remaining").innerText="₹"+rem;
+  document.getElementById("emi18").innerText="₹"+emi18;
+  document.getElementById("emi12").innerText="₹"+emi12;
+  document.getElementById("oneTime").innerText="₹"+one.toFixed(0);
 }
 
-function payNow() {
-  window.location.href = "https://pages.razorpay.com/planetspark";
+function payNow(){
+  window.location.href="https://pages.razorpay.com/planetspark";
 }
 </script>
 
