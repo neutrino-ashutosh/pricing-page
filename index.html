@@ -11,7 +11,7 @@
       height: 100vh;
     }
 
-    /* LEFT PANEL */
+    /* LEFT PANEL (UNCHANGED) */
     .left {
       width: 55%;
       padding: 40px 50px;
@@ -27,15 +27,8 @@
       width: 100%;
     }
 
-    .left-text {
-      width: 55%;
-    }
-
-    .left-image {
-      width: 45%;
-      display: flex;
-      justify-content: center;
-    }
+    .left-text { width: 55%; }
+    .left-image { width: 45%; display: flex; justify-content: center; }
 
     .left-image img {
       width: 100%;
@@ -65,11 +58,11 @@
     }
 
     .box {
-      background: rgba(255,255,255,0.96);
+      background: rgba(255,255,255,0.97);
       padding: 30px;
-      width: 360px;
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+      width: 380px;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
 
     input {
@@ -80,26 +73,78 @@
       border: 1px solid #ccc;
     }
 
-    .row {
+    /* NEW PRICING DESIGN */
+    .section-title {
+      font-size: 13px;
+      color: #888;
+      margin-top: 14px;
+      font-weight: bold;
+    }
+
+    .price-box {
+      background: #f9fafb;
+      border-radius: 10px;
+      padding: 12px;
+      margin-top: 6px;
+    }
+
+    .price-row {
       display: flex;
       justify-content: space-between;
-      margin: 6px 0;
       font-size: 14px;
     }
 
-    .label { color: #666; }
-    .value { color: #111; }
-
-    .big {
-      font-size: 26px;
-      font-weight: bold;
-      color: #1b5e20;
-      margin-top: 15px;
+    .emi-container {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
     }
 
-    .big span {
+    .emi-card {
+      flex: 1;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .emi-card.highlight {
+      border: 2px solid #2e7d32;
+      background: #f1f8f4;
+    }
+
+    .emi-price {
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 4px;
+    }
+
+    .offer-box {
+      background: #e8f5e9;
+      border: 2px solid #2e7d32;
+      border-radius: 12px;
+      padding: 15px;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    .original-price {
+      text-decoration: line-through;
+      color: #888;
+      font-size: 14px;
+    }
+
+    .offer-price {
+      font-size: 34px;
+      font-weight: bold;
+      color: #1b5e20;
+    }
+
+    .savings {
       color: #2e7d32;
-      font-size: 30px;
+      font-size: 13px;
+      margin-top: 4px;
     }
 
     button {
@@ -123,6 +168,7 @@
       color: red;
       font-size: 13px;
       margin-top: 8px;
+      text-align: center;
     }
 
     #adminPanel {
@@ -140,29 +186,9 @@
       color: #444;
     }
 
-    /* MOBILE FIX */
-    @media(max-width: 900px){
-      body {
-        flex-direction: column;
-        height: auto;
-      }
-
-      .left, .right {
-        width: 100%;
-      }
-
-      .left-inner {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .left-text, .left-image {
-        width: 100%;
-      }
-
-      .left-image {
-        margin-top: 20px;
-      }
+    @media(max-width:900px){
+      body {flex-direction:column;}
+      .left,.right {width:100%;}
     }
 
   </style>
@@ -170,36 +196,28 @@
 
 <body>
 
-<!-- LEFT -->
+<!-- LEFT PANEL (UNCHANGED) -->
 <div class="left">
   <div class="left-inner">
-
     <div class="left-text">
       <img class="logo" src="https://cdn.razorpay.com/logos/IY7M3KW1vnuOiP_large.jpeg"/>
-
       <h1>Give Your Child the Confidence to Speak & Shine 🚀</h1>
-
       <p>✔ 1:1 Live Classes</p>
       <p>✔ Certified Trainers</p>
       <p>✔ Public Speaking Skills</p>
       <p>✔ Personalized Feedback</p>
       <p>✔ Confidence Building</p>
-
       <p style="margin-top:20px;">⭐ Trusted by 1.5 Lac+ Parents</p>
-
-      <div class="highlight">
-        Your child’s transformation starts today
-      </div>
+      <div class="highlight">Your child’s transformation starts today</div>
     </div>
 
     <div class="left-image">
       <img src="https://s3.ap-south-1.amazonaws.com/rzp-prod-merchant-assets/payment-link/description/untitled%20design%20(9)_fzhauc6makwbhh_i79nfxhttx9xyi">
     </div>
-
   </div>
 </div>
 
-<!-- RIGHT -->
+<!-- RIGHT PANEL -->
 <div class="right">
   <div class="box">
 
@@ -207,18 +225,45 @@
 
     <input id="studentName" placeholder="Student Name">
     <input id="studentAge" type="number" placeholder="Student Age">
-
     <input id="sessions" type="number" placeholder="Enter Sessions (Min 120)">
     <input id="coupon" placeholder="Enter Coupon Code">
 
-    <div class="row"><span class="label">Level</span><span id="level" class="value">-</span></div>
-    <div class="row"><span class="label">Program Value</span><span id="programFee" class="value">-</span></div>
-    <div class="row"><span class="label">Enrollment Fee</span><span id="regFee" class="value">-</span></div>
-    <div class="row"><span class="label">Balance</span><span id="remaining" class="value">-</span></div>
-    <div class="row"><span class="label">EMI (18)</span><span id="emi18" class="value">-</span></div>
-    <div class="row"><span class="label">EMI (12)</span><span id="emi12" class="value">-</span></div>
+    <!-- ENTRY -->
+    <div class="section-title">Start with a small step</div>
+    <div class="price-box">
+      <div class="price-row">
+        <span>Enrollment Fee (Today)</span>
+        <span id="regFee">-</span>
+      </div>
+    </div>
 
-    <div class="big">Offer Price: <span id="oneTime">-</span></div>
+    <!-- EMI -->
+    <div class="section-title">Choose your payment plan</div>
+
+    <div class="emi-container">
+      <div class="emi-card highlight">
+        ⭐ Most Popular
+        <div>18 Months</div>
+        <div class="emi-price" id="emi18">-</div>
+      </div>
+
+      <div class="emi-card">
+        <div>12 Months</div>
+        <div class="emi-price" id="emi12">-</div>
+      </div>
+
+      <div class="emi-card">
+        <div>9 Months</div>
+        <div class="emi-price" id="emi9">-</div>
+      </div>
+    </div>
+
+    <!-- OFFER -->
+    <div class="offer-box">
+      <div class="original-price" id="programFee">-</div>
+      <div class="offer-price" id="oneTime">-</div>
+      <div class="savings" id="savings"></div>
+    </div>
 
     <div class="urgency">⏳ Offer expires in: <span id="timer">--:--</span></div>
 
@@ -233,102 +278,92 @@
       <button onclick="saveAdmin()">Save & Apply</button>
     </div>
 
-    <div class="secure">
-      🔒 100% Secure Payment via Razorpay
-    </div>
+    <div class="secure">🔒 100% Secure Payment via Razorpay</div>
 
   </div>
 </div>
 
 <script>
-const DEFAULT_CPC = 2060;
-const DEFAULT_DISC = 1710;
-let timerInterval = null;
+const DEFAULT_CPC=2060, DEFAULT_DISC=1710;
+let timerInterval=null;
 
 function getCPC(){return Number(localStorage.getItem("cpc"))||DEFAULT_CPC;}
 function getDISC(){return Number(localStorage.getItem("discountCpc"))||DEFAULT_DISC;}
 
 function toggleAdmin(){
-  let panel=document.getElementById("adminPanel");
-  panel.style.display=panel.style.display==="none"?"block":"none";
+  let p=document.getElementById("adminPanel");
+  p.style.display=p.style.display==="none"?"block":"none";
   document.getElementById("cpc").value=getCPC();
   document.getElementById("discountCpc").value=getDISC();
 }
 
 function saveAdmin(){
-  let cpc=document.getElementById("cpc").value;
-  let disc=document.getElementById("discountCpc").value;
-  if(!cpc||!disc){alert("Fill both values");return;}
-  localStorage.setItem("cpc",cpc);
-  localStorage.setItem("discountCpc",disc);
+  let c=document.getElementById("cpc").value;
+  let d=document.getElementById("discountCpc").value;
+  if(!c||!d){alert("Fill both");return;}
+  localStorage.setItem("cpc",c);
+  localStorage.setItem("discountCpc",d);
   document.getElementById("adminPanel").style.display="none";
   calculate();
 }
 
 function getKey(){
-  let name=document.getElementById("studentName").value.trim();
-  return name?"timer_"+name:null;
+  let n=document.getElementById("studentName").value.trim();
+  return n?"timer_"+n:null;
 }
 
 document.getElementById("studentName").addEventListener("change",()=>{
-  let key=getKey();
-  if(key)localStorage.removeItem(key);
+  let k=getKey();
+  if(k)localStorage.removeItem(k);
   clearInterval(timerInterval);
   document.getElementById("timer").innerText="--:--";
 });
 
 function startTimer(){
-  let key=getKey();
-  let expiry=Date.now()+30*60*1000;
-  localStorage.setItem(key,expiry);
-  runTimer(expiry);
+  let k=getKey();
+  let e=Date.now()+1800000;
+  localStorage.setItem(k,e);
+  runTimer(e);
 }
 
-function runTimer(expiry){
+function runTimer(e){
   clearInterval(timerInterval);
   timerInterval=setInterval(()=>{
-    let t=Math.floor((expiry-Date.now())/1000);
+    let t=Math.floor((e-Date.now())/1000);
     if(t<=0){
       clearInterval(timerInterval);
       document.getElementById("timer").innerText="Expired";
       return;
     }
-    let m=Math.floor(t/60);
-    let s=t%60;
+    let m=Math.floor(t/60), s=t%60;
     document.getElementById("timer").innerText=
       String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
   },1000);
 }
 
 function calculate(){
-  let sessions=Number(document.getElementById("sessions").value);
-  let coupon=document.getElementById("coupon").value.trim();
-  let key=getKey();
-  if(!sessions||sessions<120||!key)return;
+  let s=Number(document.getElementById("sessions").value);
+  let c=document.getElementById("coupon").value.trim();
+  let k=getKey();
+  if(!s||s<120||!k)return;
 
-  let CPC=getCPC();
-  let DISC=getDISC();
+  let CPC=getCPC(), DISC=getDISC();
 
-  let program=(sessions/5)*CPC;
+  let program=(s/5)*CPC;
   let reg=Math.round(program*0.15);
   let rem=program-reg;
 
   let emi18=Math.floor(rem/18);
   let emi12=Math.floor(rem/12);
+  let emi9=Math.floor(rem/9);
 
-  let lvlVal=((sessions/5)/12)+1;
-  let lvl=lvlVal<4?"Beginner":lvlVal<7?"Intermediate":"Advanced";
-
-  let expiry=localStorage.getItem(key);
+  let expiry=localStorage.getItem(k);
   let one;
 
-  if(coupon.length>=5){
-    if(!expiry){
-      startTimer();
-      expiry=localStorage.getItem(key);
-    }
+  if(c.length>=5){
+    if(!expiry){startTimer(); expiry=localStorage.getItem(k);}
     if(expiry-Date.now()>0){
-      one=(sessions/5)*DISC;
+      one=(s/5)*DISC;
       runTimer(expiry);
     }else{
       one=program;
@@ -338,19 +373,23 @@ function calculate(){
     one=program;
   }
 
-  document.getElementById("level").innerText=lvl;
-  document.getElementById("programFee").innerText="₹"+program.toFixed(0);
   document.getElementById("regFee").innerText="₹"+reg;
-  document.getElementById("remaining").innerText="₹"+rem;
-  document.getElementById("emi18").innerText="₹"+emi18;
-  document.getElementById("emi12").innerText="₹"+emi12;
+  document.getElementById("emi18").innerText="₹"+emi18+"/mo";
+  document.getElementById("emi12").innerText="₹"+emi12+"/mo";
+  document.getElementById("emi9").innerText="₹"+emi9+"/mo";
+
+  document.getElementById("programFee").innerText="₹"+program.toFixed(0);
   document.getElementById("oneTime").innerText="₹"+one.toFixed(0);
+
+  let save=program-one;
+  document.getElementById("savings").innerText=save>0?"You save ₹"+save:"";
 }
 
 function payNow(){
   window.location.href="https://pages.razorpay.com/planetspark";
 }
 </script>
+
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 
