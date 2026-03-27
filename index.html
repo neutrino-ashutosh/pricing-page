@@ -228,6 +228,7 @@
     <input id="sessions" type="number" placeholder="Enter Sessions (Min 120)">
     <input id="coupon" placeholder="Enter Coupon Code">
 
+
     <!-- ENTRY -->
     <div class="section-title">Start with a small step</div>
     <div class="price-box">
@@ -345,7 +346,7 @@ function calculate(){
   let s=Number(document.getElementById("sessions").value);
   let c=document.getElementById("coupon").value.trim();
   let k=getKey();
-  if(!s||s<120||!k)return;
+  if(!s||s<60||!k)return;
 
   let CPC=getCPC(), DISC=getDISC();
 
