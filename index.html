@@ -1,398 +1,382 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Complete Your Enrollment</title>
+<title>Complete Your Enrollment</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      display: flex;
-      height: 100vh;
-    }
+<style>
+body{
+  margin:0;
+  font-family: Inter, Arial;
+  display:flex;
+  min-height:100vh;
+  overflow-y:auto;
+}
 
-    /* LEFT PANEL (UNCHANGED) */
-    .left {
-      width: 55%;
-      padding: 40px 50px;
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-    }
+/* LEFT */
+.left{
+  width:55%;
+  padding:40px 60px;
+  background:#fff;
+  display:flex;
+  justify-content:center;
+}
 
-    .left-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-    }
+.left-inner{
+  width:100%;
+  max-width:700px;
+}
 
-    .left-text { width: 55%; }
-    .left-image { width: 45%; display: flex; justify-content: center; }
+.logo{
+  width:140px;
+  margin-bottom:30px;
+}
 
-    .left-image img {
-      width: 100%;
-      max-width: 320px;
-    }
+.left-content{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
 
-    .logo {
-      width: 160px;
-      margin-bottom: 20px;
-    }
+.left-text{
+  width:55%;
+}
 
-    .highlight {
-      margin-top: 20px;
-      font-weight: bold;
-      color: #2e7d32;
-      font-size: 16px;
-    }
+.left-text h1{
+  font-size:32px;
+  line-height:1.3;
+  margin-bottom:16px;
+}
 
-    /* RIGHT PANEL */
-    .right {
-      width: 45%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: url('https://cdn.razorpay.com/static/assets/paymentpages/light_mobile.jpg');
-      background-size: cover;
-    }
+.left-text p{
+  font-size:15px;
+  margin:8px 0;
+}
 
-    .box {
-      background: rgba(255,255,255,0.97);
-      padding: 30px;
-      width: 380px;
-      border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
+.trust{
+  margin-top:18px;
+}
 
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
+.highlight{
+  color:#2e7d32;
+  font-weight:600;
+  margin-top:8px;
+}
 
-    /* NEW PRICING DESIGN */
-    .section-title {
-      font-size: 13px;
-      color: #888;
-      margin-top: 14px;
-      font-weight: bold;
-    }
+.left-image{
+  width:45%;
+  display:flex;
+  justify-content:flex-end;
+}
 
-    .price-box {
-      background: #f9fafb;
-      border-radius: 10px;
-      padding: 12px;
-      margin-top: 6px;
-    }
+.left-image img{
+  max-width:300px;
+}
 
-    .price-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-    }
+/* RIGHT */
+.right{
+  width:45%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#f6f8fb;
+}
 
-    .emi-container {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-    }
+.box{
+  width:380px;
+  max-height:90vh;
+  overflow-y:auto;
+  background:#fff;
+  padding:24px;
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
 
-    .emi-card {
-      flex: 1;
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 10px;
-      text-align: center;
-    }
+h3{
+  margin-bottom:12px;
+}
 
-    .emi-card.highlight {
-      border: 2px solid #2e7d32;
-      background: #f1f8f4;
-    }
+input{
+  width:100%;
+  padding:10px;
+  margin:6px 0;
+  border:1px solid #ddd;
+  border-radius:6px;
+}
 
-    .emi-price {
-      font-size: 16px;
-      font-weight: bold;
-      margin-top: 4px;
-    }
+.section-title{
+  font-size:12px;
+  color:#666;
+  margin-top:12px;
+}
 
-    .offer-box {
-      background: #e8f5e9;
-      border: 2px solid #2e7d32;
-      border-radius: 12px;
-      padding: 15px;
-      margin-top: 12px;
-      text-align: center;
-    }
+.price-box{
+  background:#f3f5f7;
+  border-radius:10px;
+  padding:12px;
+  margin-top:6px;
+}
 
-    .original-price {
-      text-decoration: line-through;
-      color: #888;
-      font-size: 14px;
-    }
+.price-row{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+  font-weight:500;
+}
 
-    .offer-price {
-      font-size: 34px;
-      font-weight: bold;
-      color: #1b5e20;
-    }
+/* PAYMENT */
+.payment-grid{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
 
-    .savings {
-      color: #2e7d32;
-      font-size: 13px;
-      margin-top: 4px;
-    }
+.payment-col{
+  flex:1;
+  border:1px solid #eee;
+  border-radius:10px;
+  padding:10px;
+}
 
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      background: #528ff0;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 15px;
-      cursor: pointer;
-    }
+.emi-card{
+  border:1px solid #ddd;
+  padding:8px;
+  border-radius:8px;
+  margin-top:6px;
+  text-align:center;
+}
 
-    .secondary-btn {
-      background: #f1f3f4;
-      color: #333;
-    }
+.emi-card.highlight{
+  border:2px solid #2e7d32;
+  background:#f1f8f4;
+}
 
-    .urgency {
-      color: red;
-      font-size: 13px;
-      margin-top: 8px;
-      text-align: center;
-    }
+.emi-price{
+  font-weight:bold;
+  font-size:14px;
+}
 
-    #adminPanel {
-      display: none;
-      background: #f5f5f5;
-      padding: 10px;
-      border-radius: 6px;
-      margin-top: 10px;
-    }
+.offer-box{
+  text-align:center;
+}
 
-    .secure {
-      font-size: 12px;
-      margin-top: 10px;
-      text-align: center;
-      color: #444;
-    }
+.original-price{
+  text-decoration:line-through;
+  font-size:13px;
+  color:#888;
+}
 
-    @media(max-width:900px){
-      body {flex-direction:column;}
-      .left,.right {width:100%;}
-    }
+.offer-price{
+  font-size:24px;
+  font-weight:bold;
+  color:#2e7d32;
+}
 
-  </style>
+.savings{
+  font-size:12px;
+  color:#2e7d32;
+}
+
+/* BUTTONS */
+button{
+  width:100%;
+  padding:10px;
+  margin-top:8px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  background:#528ff0;
+  color:white;
+}
+
+.secondary-btn{
+  background:#f1f3f4;
+  color:#333;
+}
+
+.urgency{
+  font-size:12px;
+  color:red;
+  text-align:center;
+}
+
+/* ADMIN */
+#adminPanel{
+  display:none;
+  margin-top:10px;
+  background:#f5f5f5;
+  padding:10px;
+  border-radius:6px;
+}
+
+.secure{
+  text-align:center;
+  font-size:11px;
+  margin-top:10px;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  body{flex-direction:column;}
+  .left,.right{width:100%;}
+}
+</style>
 </head>
 
 <body>
 
-<!-- LEFT PANEL (UNCHANGED) -->
+<!-- LEFT -->
 <div class="left">
   <div class="left-inner">
-    <div class="left-text">
-      <img class="logo" src="https://cdn.razorpay.com/logos/IY7M3KW1vnuOiP_large.jpeg"/>
-      <h1>Give Your Child the Confidence to Speak & Shine 🚀</h1>
-      <p>✔ 1:1 Live Classes</p>
-      <p>✔ Certified Trainers</p>
-      <p>✔ Public Speaking Skills</p>
-      <p>✔ Personalized Feedback</p>
-      <p>✔ Confidence Building</p>
-      <p style="margin-top:20px;">⭐ Trusted by 1.5 Lac+ Parents</p>
-      <div class="highlight">Your child’s transformation starts today</div>
-    </div>
 
-    <div class="left-image">
-      <img src="https://s3.ap-south-1.amazonaws.com/rzp-prod-merchant-assets/payment-link/description/untitled%20design%20(9)_fzhauc6makwbhh_i79nfxhttx9xyi">
+    <img class="logo" src="https://cdn.razorpay.com/logos/IY7M3KW1vnuOiP_large.jpeg"/>
+
+    <div class="left-content">
+
+      <div class="left-text">
+        <h1>Give Your Child the Confidence to Speak & Shine 🚀</h1>
+
+        <p>✔ 1:1 Live Classes</p>
+        <p>✔ Certified Trainers</p>
+        <p>✔ Public Speaking Skills</p>
+        <p>✔ Personalized Feedback</p>
+        <p>✔ Confidence Building</p>
+
+        <p class="trust">⭐ Trusted by 1.5 Lac+ Parents</p>
+        <p class="highlight">Your child’s transformation starts today</p>
+      </div>
+
+      <div class="left-image">
+        <img src="https://s3.ap-south-1.amazonaws.com/rzp-prod-merchant-assets/payment-link/description/untitled%20design%20(9)_fzhauc6makwbhh_i79nfxhttx9xyi">
+      </div>
+
     </div>
   </div>
 </div>
 
-<!-- RIGHT PANEL -->
+<!-- RIGHT -->
 <div class="right">
-  <div class="box">
+<div class="box">
 
-    <h3>Complete Your Enrollment</h3>
+<h3>Complete Enrollment</h3>
 
-    <input id="studentName" placeholder="Student Name">
-    <input id="studentAge" type="number" placeholder="Student Age">
-    <input id="sessions" type="number" placeholder="Enter Sessions (Min 120)">
-    <input id="coupon" placeholder="Enter Coupon Code">
+<input id="studentName" placeholder="Student Name">
+<input id="studentAge" type="number" placeholder="Age">
+<input id="sessions" type="number" placeholder="Sessions (Min 120)">
+<input id="coupon" placeholder="Coupon Code">
 
-
-    <!-- ENTRY -->
-    <div class="section-title">Start with a small step</div>
-    <div class="price-box">
-      <div class="price-row">
-        <span>Enrollment Fee (Today)</span>
-        <span id="regFee">-</span>
-      </div>
-    </div>
-
-    <!-- EMI -->
-    <div class="section-title">Choose your payment plan</div>
-
-    <div class="emi-container">
-      <div class="emi-card highlight">
-        ⭐ Most Popular
-        <div>18 Months</div>
-        <div class="emi-price" id="emi18">-</div>
-      </div>
-
-      <div class="emi-card">
-        <div>12 Months</div>
-        <div class="emi-price" id="emi12">-</div>
-      </div>
-
-      <div class="emi-card">
-        <div>9 Months</div>
-        <div class="emi-price" id="emi9">-</div>
-      </div>
-    </div>
-
-    <!-- OFFER -->
-    <div class="offer-box">
-      <div class="original-price" id="programFee">-</div>
-      <div class="offer-price" id="oneTime">-</div>
-      <div class="savings" id="savings"></div>
-    </div>
-
-    <div class="urgency">⏳ Offer expires in: <span id="timer">--:--</span></div>
-
-    <button class="secondary-btn" onclick="calculate()">Check Program Value</button>
-    <button onclick="payNow()">Proceed to Payment</button>
-
-    <button onclick="toggleAdmin()">⚙ Admin</button>
-
-    <div id="adminPanel">
-      <input id="cpc" type="number" placeholder="Default CPC">
-      <input id="discountCpc" type="number" placeholder="Discount CPC">
-      <button onclick="saveAdmin()">Save & Apply</button>
-    </div>
-
-    <div class="secure">🔒 100% Secure Payment via Razorpay</div>
-
+<!-- NEW ENROLLMENT BOX -->
+<div class="section-title">Start with a small step</div>
+<div class="price-box">
+  <div class="price-row">
+    <span>Enrollment Fee (Today)</span>
+    <span id="regFee">-</span>
   </div>
+</div>
+
+<div class="section-title">Payment Options</div>
+
+<div class="payment-grid">
+
+<div class="payment-col">
+  <b>Monthly Plan</b>
+
+  <div class="emi-card highlight">
+    ⭐ 18 Months
+    <div class="emi-price" id="emi18">-</div>
+  </div>
+
+  <div class="emi-card">
+    12 Months
+    <div class="emi-price" id="emi12">-</div>
+  </div>
+
+  <div class="emi-card">
+    9 Months
+    <div class="emi-price" id="emi9">-</div>
+  </div>
+</div>
+
+<div class="payment-col">
+  <b>One Time</b>
+
+  <div class="offer-box">
+    <div class="original-price" id="programFee">-</div>
+    <div class="offer-price" id="oneTime">-</div>
+    <div class="savings" id="savings"></div>
+  </div>
+
+</div>
+
+</div>
+
+<div class="urgency">⏳ <span id="timer">--:--</span></div>
+
+<button class="secondary-btn" onclick="calculate()">Check Value</button>
+<button onclick="payNow()">Proceed</button>
+
+<button onclick="toggleAdmin()">⚙ Admin</button>
+
+<div id="adminPanel">
+  <input id="cpc" type="number" placeholder="EMI CPC">
+  <input id="discountCpc" type="number" placeholder="One Shot CPC">
+  <button onclick="saveAdmin()">Save</button>
+</div>
+
+<div class="secure">🔒 Secure via Razorpay</div>
+
+</div>
 </div>
 
 <script>
 const DEFAULT_CPC=2060, DEFAULT_DISC=1710;
-let timerInterval=null;
 
 function getCPC(){return Number(localStorage.getItem("cpc"))||DEFAULT_CPC;}
 function getDISC(){return Number(localStorage.getItem("discountCpc"))||DEFAULT_DISC;}
 
 function toggleAdmin(){
-  let p=document.getElementById("adminPanel");
-  p.style.display=p.style.display==="none"?"block":"none";
-  document.getElementById("cpc").value=getCPC();
-  document.getElementById("discountCpc").value=getDISC();
+ let p=document.getElementById("adminPanel");
+ p.style.display=p.style.display==="none"?"block":"none";
+ document.getElementById("cpc").value=getCPC();
+ document.getElementById("discountCpc").value=getDISC();
 }
 
 function saveAdmin(){
-  let c=document.getElementById("cpc").value;
-  let d=document.getElementById("discountCpc").value;
-  if(!c||!d){alert("Fill both");return;}
-  localStorage.setItem("cpc",c);
-  localStorage.setItem("discountCpc",d);
-  document.getElementById("adminPanel").style.display="none";
-  calculate();
-}
-
-function getKey(){
-  let n=document.getElementById("studentName").value.trim();
-  return n?"timer_"+n:null;
-}
-
-document.getElementById("studentName").addEventListener("change",()=>{
-  let k=getKey();
-  if(k)localStorage.removeItem(k);
-  clearInterval(timerInterval);
-  document.getElementById("timer").innerText="--:--";
-});
-
-function startTimer(){
-  let k=getKey();
-  let e=Date.now()+1800000;
-  localStorage.setItem(k,e);
-  runTimer(e);
-}
-
-function runTimer(e){
-  clearInterval(timerInterval);
-  timerInterval=setInterval(()=>{
-    let t=Math.floor((e-Date.now())/1000);
-    if(t<=0){
-      clearInterval(timerInterval);
-      document.getElementById("timer").innerText="Expired";
-      return;
-    }
-    let m=Math.floor(t/60), s=t%60;
-    document.getElementById("timer").innerText=
-      String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
-  },1000);
+ let c=document.getElementById("cpc").value;
+ let d=document.getElementById("discountCpc").value;
+ localStorage.setItem("cpc",c);
+ localStorage.setItem("discountCpc",d);
+ document.getElementById("adminPanel").style.display="none";
+ calculate();
 }
 
 function calculate(){
-  let s=Number(document.getElementById("sessions").value);
-  let c=document.getElementById("coupon").value.trim();
-  let k=getKey();
-  if(!s||s<60||!k)return;
+ let s=Number(document.getElementById("sessions").value);
+ if(!s)return;
 
-  let CPC=getCPC(), DISC=getDISC();
+ let CPC=getCPC(), DISC=getDISC();
 
-  let program=(s/5)*CPC;
-  let reg=Math.round(program*0.15);
-  let rem=program-reg;
+ let program=(s/5)*CPC;
+ let reg=Math.round(program*0.15);
+ let remaining=program-reg;
 
-  let emi18=Math.floor(rem/18);
-  let emi12=Math.floor(rem/12);
-  let emi9=Math.floor(rem/9);
+ let one=(s/5)*DISC;
 
-  let expiry=localStorage.getItem(k);
-  let one;
+ document.getElementById("regFee").innerText="₹"+reg;
 
-  if(c.length>=5){
-    if(!expiry){startTimer(); expiry=localStorage.getItem(k);}
-    if(expiry-Date.now()>0){
-      one=(s/5)*DISC;
-      runTimer(expiry);
-    }else{
-      one=program;
-      document.getElementById("timer").innerText="Expired";
-    }
-  }else{
-    one=program;
-  }
+ document.getElementById("emi18").innerText="₹"+Math.floor(remaining/18)+"/mo";
+ document.getElementById("emi12").innerText="₹"+Math.floor(remaining/12)+"/mo";
+ document.getElementById("emi9").innerText="₹"+Math.floor(remaining/9)+"/mo";
 
-  document.getElementById("regFee").innerText="₹"+reg;
-  document.getElementById("emi18").innerText="₹"+emi18+"/mo";
-  document.getElementById("emi12").innerText="₹"+emi12+"/mo";
-  document.getElementById("emi9").innerText="₹"+emi9+"/mo";
+ document.getElementById("programFee").innerText="₹"+program;
+ document.getElementById("oneTime").innerText="₹"+one;
 
-  document.getElementById("programFee").innerText="₹"+program.toFixed(0);
-  document.getElementById("oneTime").innerText="₹"+one.toFixed(0);
-
-  let save=program-one;
-  document.getElementById("savings").innerText=save>0?"You save ₹"+save:"";
+ document.getElementById("savings").innerText="Save ₹"+(program-one);
 }
 
 function payNow(){
-  window.location.href="https://pages.razorpay.com/planetspark";
+ window.location.href="https://pages.razorpay.com/planetspark";
 }
 </script>
-
-<script defer src="/_vercel/insights/script.js"></script>
-<script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 
 </body>
 </html>
